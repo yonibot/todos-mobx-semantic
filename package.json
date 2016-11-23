@@ -1,14 +1,10 @@
 {
   "name": "react-simple-boilerplate",
   "version": "1.0.0",
-  "description": "Simple and lightweight Boilerplate for ReactJS projects",
+  "description": "MobX React ES7 Webpack Boilerplate",
   "scripts": {
     "lint": "eslint src",
     "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate.git"
   },
   "keywords": [
     "react",
@@ -19,12 +15,6 @@
     "edit",
     "webpack"
   ],
-  "author": "Noah-Jerome Lotzer <n.lotzer@neusta.de>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate/issues"
-  },
-  "homepage": "https://github.com/noahlotzer/react-simple-boilerplate",
   "devDependencies": {
     "babel-core": "6.10.4",
     "babel-loader": "6.0.1",
