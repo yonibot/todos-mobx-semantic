@@ -1,42 +1,45 @@
 import React, {Component} from 'react';
 import { observable, computed, useStrict, action } from 'mobx';
 import { observer } from 'mobx-react';
+import { Icon } from 'semantic-ui-react';
 import DevTools from 'mobx-react-devtools';
 import Todo from './models/Todo';
 import TodoList from './models/TodoList';
 import User from './models/User';
+import TodoItemUI from './views/TodoListView/TodoItemUI';
 
-// useStrict(true);
+useStrict(true);
 var myTodoList = new TodoList();
-myTodoList.todos.push(new Todo('Buy milk'));
+// myTodoList.todos.push(new Todo('Buy milk'));
 
 @observer class TodoListView extends Component {
-  handleKeyPress = (e) => {
+  @action handleKeyPress = (e) => {
     if (e.key == 'Enter') {
       this.props.todoList.todos.push(new Todo(e.target.value));
       e.target.value = '';
     }
   }
 
-  completeTodo() {
+  @action toggleCompleted = (todo) => {
+    todo.completed = !todo.completed;
+  }
 
+  @action deleteTodo = (todo) => {
+    this.props.todoList.todos.remove(todo);
   }
 
   render() {
     return (
       <div> 
         <input
-          onKeyDown={this.handleKeyPress}
-          />
+          onKeyDown={this.handleKeyPress} />
         <ul>
           {this.props.todoList.todos.map(todo =>
-              <li>
-                <TodoItemView key={todo.id} todo={todo} />
-                <input 
-                  type='checkbox'
-                  checked={todo.completed}
-                  onChange={ ()=> this.completeTodo(todo) } />
-                <i className=""
+              <li key={ todo.id }>
+                <TodoItemUI 
+                  todo={ todo }
+                  toggleCompleted={ this.toggleCompleted }
+                  deleteTodo={ this.deleteTodo } />
               </li>
             )}
         </ul>
@@ -46,12 +49,6 @@ myTodoList.todos.push(new Todo('Buy milk'));
   }
 }
 
-const TodoItemView = ({todo}) => (
-  <div>{todo.title}</div>
-)
-TodoItemView.propTypes = {
-  todo: React.PropTypes.object.isRequired
-}
 
 class App extends Component {
   render() {

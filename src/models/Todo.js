@@ -1,6 +1,7 @@
 import Utils from '../utils/utilities';
 import { observable, computed, useStrict, action } from 'mobx';
 
+
 class Todo {
 	@observable title;
 	@observable completed;
