@@ -2,28 +2,15 @@ import React, {Component} from 'react';
 import { observable, computed, useStrict, action } from 'mobx';
 import { observer } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
-useStrict(true);
+import Todo from './models/Todo';
+import TodoList from './models/TodoList';
+import User from './models/User';
 
-class Todo {
-    id = Math.random();
-    @observable title;
-    @observable finished = false;
-    constructor(title, finished=true) {
-        this.title = title;
-        this.finished = finished;
-    }
-}
+// useStrict(true);
+var myTodoList = new TodoList();
+myTodoList.todos.push(new Todo('Buy milk'));
 
-class TodoList {
-    @observable todos = [];
-    @computed get unfinishedTodoCount() {
-        return this.todos.filter(todo => !todo.finished).length;
-    }
-}
-
-@observer
-class TodoListView extends Component {
-  @action("Adding text to the input field")
+@observer class TodoListView extends Component {
   handleKeyPress = (e) => {
     if (e.key == 'Enter') {
       this.props.todoList.todos.push(new Todo(e.target.value));
@@ -31,36 +18,45 @@ class TodoListView extends Component {
     }
   }
 
+  completeTodo() {
+
+  }
+
   render() {
-      return (
-        <div>
-        <input onKeyPress={this.handleKeyPress}></input>
-          <ul>
-              {this.props.todoList.todos.map(todo =>
-                  <TodoView todo={todo} key={todo.id} />
-              )}
-          </ul>
-          Tasks left: {this.props.todoList.unfinishedTodoCount}
-          <DevTools />
+    return (
+      <div> 
+        <input
+          onKeyDown={this.handleKeyPress}
+          />
+        <ul>
+          {this.props.todoList.todos.map(todo =>
+              <li>
+                <TodoItemView key={todo.id} todo={todo} />
+                <input 
+                  type='checkbox'
+                  checked={todo.completed}
+                  onChange={ ()=> this.completeTodo(todo) } />
+                <i className=""
+              </li>
+            )}
+        </ul>
+        <DevTools />
       </div>
     )
   }
 }
 
-const TodoView = observer(({todo}) =>
-    <li>
-        <input
-            type="checkbox"
-            checked={todo.finished}
-            onClick={() => todo.finished = !todo.finished}
-        />{todo.title}
-    </li>
+const TodoItemView = ({todo}) => (
+  <div>{todo.title}</div>
 )
+TodoItemView.propTypes = {
+  todo: React.PropTypes.object.isRequired
+}
 
 class App extends Component {
   render() {
     return (
-      <TodoListView todoList={new TodoList()} />
+      <TodoListView todoList={myTodoList} />
     )
   }
 }
