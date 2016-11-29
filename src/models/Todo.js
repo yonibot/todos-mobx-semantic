@@ -6,10 +6,11 @@ class Todo {
 	@observable title;
 	@observable completed;
 	@observable id;
+	user;
 
 	constructor(title) {
 		this.title = title;
-		this.id = Utils.generateUUID()
+		this.id = Utils.generateUUID();
 	}
 }
 

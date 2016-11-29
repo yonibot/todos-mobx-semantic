@@ -7,5 +7,10 @@ require("../styles/application.scss");
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.js';
+ReactDOM.render((
+	<Router history={ browserHistory }>
+		
 
-ReactDOM.render(<App />, document.getElementById('react-root'));
+	</Router>
+
+), document.getElementById('react-root'));

@@ -5,9 +5,11 @@ class User {
 	@observable username;
 	@observable id;
 
-	constructor() {
+	constructor(username=undefined) {
 		this.id = Utils.generateUUID()
+		if (username) { this.username = username };
 	}
+
 }
 
 export { User as default };
