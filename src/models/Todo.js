@@ -1,16 +1,16 @@
 import Utils from '../utils/utilities';
 import { observable, computed, useStrict, action } from 'mobx';
 
-
 class Todo {
 	@observable title;
 	@observable completed;
-	@observable id;
+	id;
 	user;
 
-	constructor(title) {
+	constructor(title, user) {
 		this.title = title;
 		this.id = Utils.generateUUID();
+		this.user = user;
 	}
 }
 

@@ -1,36 +1,41 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { observable, computed, useStrict, action } from 'mobx';
 import { observer } from 'mobx-react';
 import { Icon } from 'semantic-ui-react';
 import DevTools from 'mobx-react-devtools';
 import Todo from '../models/Todo';
-import TodoList from '../models/TodoList';
 import User from '../models/User';
 import TodoItemUI from './TodoItemUI';
 
 @observer class TodoListView extends Component {
+  currentUser = () => {
+    return this.props.usersStore.users[0];
+    // return this.props.usersStore.users.find(e=>e.username==this.props.params.username)[0]
+  }
+
   handleKeyPress = (e) => {
     if (e.key == 'Enter') {
-      this.props.todoList.addTodo(new Todo(e.target.value));
+      this.props.todosStore.addTodo(e.target.value, this.currentUser());
       e.target.value = '';
     }
   }
 
   toggleCompleted = (todo) => {
-    this.props.todoList.toggleCompleted(todo);
+    this.props.todosStore.toggleCompleted(todo);
   }
 
   deleteTodo = (todo) => {
-    this.props.todoList.deleteTodo(todo);
+    this.props.todosStore.deleteTodo(todo);
   }
 
   render() {
+    let currentTodos = this.props.todosStore.myTodos(this.currentUser());
     return (
       <div> 
         <input
           onKeyDown={this.handleKeyPress} />
         <ul>
-          {this.props.todoList.todos.map(todo =>
+          {currentTodos.map(todo =>
               <li key={ todo.id }>
                 <TodoItemUI 
                   todo={ todo }

@@ -2,18 +2,14 @@ import { observable, computed, useStrict, action } from 'mobx';
 import Todo from './Todo';
 
 export class TodosStore {
-	@observable todos;
+	@observable todos = [];
 
-	constructor() {
-		this.todos = asMap();
-	}
-
-	@action addTodo(todo, user) {
-		this.props.todoList.todos.push(new Todo(e.target.value, user));
+	@action addTodo(text, user) {
+		this.todos.push(new Todo(text, user))
 	}
 
 	@action deleteTodo(todo) {
-    // remove is an observable array method
+    // remove is an obzservable array method
 		return this.todos.remove(todo);
 	}
 
@@ -21,20 +17,21 @@ export class TodosStore {
     todo.completed = !todo.completed;
   }
 
-  @computed todos(user) {
-  	user = user;
-  	return this.todos[]
+  myTodos(user) {
+  	if (user) {
+  		return this.todos.filter(todo => todo.user == user);
+  	} else {
+  		return this.todos;
+  	}
+  	return this.todos;
   }
 
-  @computed users() {
-  	return Object.keys(this.todos);
-  }
 }
 
 
 
-export class UserStore {
-
+export class UsersStore {
+	@observable users = [];
 }
 
 
