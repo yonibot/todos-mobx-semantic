@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { observable, computed, useStrict, action } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { Icon } from 'semantic-ui-react';
 import DevTools from 'mobx-react-devtools';
 import Todo from '../models/Todo';
 import User from '../models/User';
 import TodoItemUI from './TodoItemUI';
 
+@inject('todosStore', 'usersStore')
 @observer class TodoListView extends Component {
   currentUser = () => {
-    return this.props.usersStore.users[0];
-    // return this.props.usersStore.users.find(e=>e.username==this.props.params.username)[0]
+    return this.props.usersStore.users.find(e=>e.username==this.props.params.username);
   }
 
   handleKeyPress = (e) => {
@@ -32,6 +32,7 @@ import TodoItemUI from './TodoItemUI';
     let currentTodos = this.props.todosStore.myTodos(this.currentUser());
     return (
       <div> 
+        <h1>Current User: <strong>{ this.currentUser().username }</strong></h1>
         <input
           onKeyDown={this.handleKeyPress} />
         <ul>
