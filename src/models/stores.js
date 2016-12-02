@@ -1,5 +1,6 @@
 import { observable, computed, useStrict, action } from 'mobx';
 import Todo from './Todo';
+import User from './User';
 
 export class TodosStore {
 	@observable todos = [];
@@ -9,7 +10,7 @@ export class TodosStore {
 	}
 
 	@action deleteTodo(todo) {
-    // remove is an obzservable array method
+    // remove is an observable array method
 		return this.todos.remove(todo);
 	}
 
@@ -32,6 +33,10 @@ export class TodosStore {
 
 export class UsersStore {
 	@observable users = [];
+
+  @action addUser(username) {
+    this.users.push(new User(username));
+  }
 }
 
 
