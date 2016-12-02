@@ -14,12 +14,12 @@ import Todo from './models/Todo';
 import User from './models/User';
 
 const usersStore = new UsersStore();
-const gemma = usersStore.addUser('Gemma'); 
-const alice = usersStore.addUser('Alice');
+usersStore.addUser('Gemma'); 
+usersStore.addUser('Alice');
 
 const todosStore = new TodosStore();
-todosStore.addTodo(new Todo('Go hunt for gems'), gemma);
-todosStore.addTodo(new Todo('Find a job'), alice);
+todosStore.addTodo('Go hunt for gems', usersStore.users[0]);
+todosStore.addTodo('Find a job', usersStore.users[1]);
 
 const allStores = {usersStore, todosStore}
 

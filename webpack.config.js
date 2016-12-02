@@ -7,6 +7,9 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:3001',
     './src/index.js'
   ],
+  historyApiFallback: {
+    index: '/build/'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',

@@ -6,7 +6,7 @@ export class TodosStore {
 	@observable todos = [];
 
 	@action addTodo(text, user) {
-		this.todos.push(new Todo(text, user))
+		this.todos.push(new Todo(text, user));
 	}
 
 	@action deleteTodo(todo) {
