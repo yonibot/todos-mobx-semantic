@@ -14,8 +14,9 @@ import Todo from './models/Todo';
 import User from './models/User';
 
 const usersStore = new UsersStore();
-usersStore.addUser('Gemma'); 
-usersStore.addUser('Alice');
+usersStore.addUser(new User({username: 'Gemma', email: 'gemma@example.com'})); 
+usersStore.addUser(new User({username: 'Alice', email: 'alice@example.com'})); 
+usersStore.addUser(new User({username: 'Yoni', email: 'yoni@fastmail.com'})); 
 
 const todosStore = new TodosStore();
 todosStore.addTodo('Go hunt for gems', usersStore.users[0]);

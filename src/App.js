@@ -5,14 +5,16 @@ import { TodosStore, UsersStore } from './models/stores';
 import UsersUI from './TodoListView/UsersUI';
 import User from './models/User';
 import TodoListView from './TodoListView/TodoListView';
+import AddUser from './TodoListView/AddUser';
 
 
 class App extends Component {
   render() {
     return (
     	<div>
-    		<Match pattern="/" component={ UsersUI } />
-    		<Match pattern="/users/:username" component={ TodoListView } />
+    		<Match exactly pattern="/" component={ UsersUI } />
+    		<Match exactly pattern="/adduser" component={ AddUser } />
+    		<Match exactly pattern="/users/:username" component={ TodoListView } />
       </div>
     )
   }

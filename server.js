@@ -1,14 +1,17 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+// server.js
+var express = require('express')
+var path = require('path')
+var app = express()
 
-new WebpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath
-  })
-  .listen(3001, '0.0.0.0', function (err, result) {
-    if (err) {
-      console.log(err);
-    }
+// serve our static stuff like index.css
+app.use(express.static(path.join(__dirname, 'public')))
 
-    console.log('Running at http://0.0.0.0:3001');
-  });
+// send all requests to index.html so browserHistory in React Router works
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
+
+var PORT = process.env.PORT || 8080
+app.listen(PORT, function() {
+  console.log('Production Express server running at localhost:' + PORT)
+})

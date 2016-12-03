@@ -3,19 +3,11 @@
   "version": "1.0.0",
   "description": "MobX React ES7 Webpack Boilerplate",
   "scripts": {
-    "lint": "eslint src",
-    "start": "node server.js"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "webpack-dev-server --inline --content-base . --history-api-fallback",
+    "start:prod": "webpack && node server.js"
   },
-  "keywords": [
-    "react",
-    "reactjs",
-    "boilerplate",
-    "reload",
-    "live",
-    "edit",
-    "webpack"
-  ],
-  "devDependencies": {
+  "Dependencies": {
     "babel-core": "6.10.4",
     "babel-loader": "6.0.1",
     "babel-preset-es2015": "6.9.0",
@@ -35,6 +27,7 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2017": "^6.16.0",
     "history": "^4.4.1",
+    "md5": "^2.2.1",
     "mobx": "^2.6.3",
     "mobx-react": "^3.5.9",
     "react": "15.2.1",

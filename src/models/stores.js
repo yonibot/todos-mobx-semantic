@@ -34,8 +34,8 @@ export class TodosStore {
 export class UsersStore {
 	@observable users = [];
 
-  @action addUser(username) {
-    this.users.push(new User(username));
+  @action addUser(values) {
+    this.users.push(new User(values));
   }
 }
 

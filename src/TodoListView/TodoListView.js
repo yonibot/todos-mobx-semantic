@@ -6,7 +6,8 @@ import DevTools from 'mobx-react-devtools';
 import Todo from '../models/Todo';
 import User from '../models/User';
 import TodoItemUI from './TodoItemUI';
-
+import { Link } from 'react-router';
+ 
 @inject('todosStore', 'usersStore')
 @observer class TodoListView extends Component {
   currentUser = () => {
@@ -45,6 +46,8 @@ import TodoItemUI from './TodoItemUI';
               </li>
             )}
         </ul>
+        <br />
+        <Link to="/">Home</Link>
         <DevTools />
       </div>
     )
