@@ -11,7 +11,7 @@ import AddUser from './TodoListView/AddUser';
 class App extends Component {
   render() {
     return (
-    	<div>
+    	<div style={{ height: '100%' }}>
     		<Match exactly pattern="/" component={ UsersUI } />
     		<Match exactly pattern="/adduser" component={ AddUser } />
     		<Match exactly pattern="/users/:username" component={ TodoListView } />

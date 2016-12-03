@@ -3,23 +3,37 @@ import { observable, action } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { Link, Redirect } from 'react-router';
 import User from '../models/User';
-import { Button, Icon, Card, Image } from 'semantic-ui-react';
+import { Button, Icon, Card, Image, Form } from 'semantic-ui-react';
+import DevTools from 'mobx-react-devtools';
 
-const SubmitButton = ({handleSubmit}) => {
-	return (
-		<Button animated onClick={ handleSubmit }>
-			<Button.Content visible>Submit</Button.Content>
-			<Button.Content hidden>
-				<Icon name='left arrow' />
-			</Button.Content>
-		</Button>
-	)
-}
+
+const SubmitButton = ({handleSubmit}) => 
+	<Button animated onClick={ handleSubmit }>
+		<Button.Content visible>Submit</Button.Content>
+		<Button.Content hidden>
+			<Icon name='left arrow' />
+		</Button.Content>
+	</Button>
+
+const UserCard = ({user}) =>
+	<Card>
+		<Image src={ (new User(user)).gravatar } />
+		<Card.Content>
+			<Card.Header>
+				{ user.username }
+			</Card.Header>
+			<Card.Meta>
+				{ user.email }
+			</Card.Meta>
+		</Card.Content>
+	</Card>
+
+var newUser = new User({username: '', email: ''});
 
 @inject('usersStore') @observer 
 class AddUser extends Component {
 	@observable toggleRedirect;
-	@observable newUser = {username: '', email: ''};
+	@observable newUser = newUser;
 
 	@action handleNameChange = (e) => {
 		this.newUser.username = e.target.value;
@@ -30,7 +44,7 @@ class AddUser extends Component {
 	}
 
 	@action handleSubmit = () => {
-		this.props.usersStore.addUser(new User(this.newUser));
+		this.props.usersStore.addUser(this.newUser);
 		this.toggleRedirect = true;
 	}
 
@@ -38,29 +52,28 @@ class AddUser extends Component {
 		return (
 			<div>
 				<h3>Add new user:</h3>
-				<input 
-					value={ this.newUser.name }
-					onChange={ this.handleNameChange } 
-					placeholder='username' />
-				<input 
-					value={ this.newUser.email }
-					onChange={ this.handleEmailChange }
-					placeholder='joe@example.com' />
-				<SubmitButton handleSubmit={ this.handleSubmit } />
+			  <Form>
+			    <Form.Field>
+			      <label>Username</label>
+						<input 
+							value={ this.newUser.usernamename }
+							onChange={ this.handleNameChange } 
+							placeholder='username' />
+			    </Form.Field>
+			    <Form.Field>
+			      <label>Email</label>
+						<input 
+							value={ this.newUser.email }
+							onChange={ this.handleEmailChange }
+							placeholder='joe@example.com' />
+			    </Form.Field>
+					<SubmitButton handleSubmit={ this.handleSubmit } />
+			  </Form>
 				<br />
-				<Card>
-					<Image src={ this.newUser.gravatar } />
-					<Card.Content>
-						<Card.Header>
-							{ this.newUser.name }
-						</Card.Header>
-						<Card.Meta>
-							{ this.newUser.email }
-						</Card.Meta>
-					</Card>
-				</Card>
+				<UserCard user={ this.newUser } />
 				<Link to="/">Back</Link>
 				{this.toggleRedirect && <Redirect to={{ pathname: '/' }} />}
+				<DevTools />
 			</div>
 		)
 	}

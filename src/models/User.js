@@ -4,15 +4,16 @@ import md5 from 'md5';
 
 
 class User {
+	id;
 	@observable username;
-	@observable id;
 	@observable email;
 
-	constructor({username, email}) {
-		Object.assign(this, {username}, {email});
+	constructor(user) {
+		Object.assign(this, user);
 	}
 
 	@computed get gravatar() {
+		console.log("Getting gravatar!")
 		return `https://www.gravatar.com/avatar/${ md5(this.email) }`
 	}
 
