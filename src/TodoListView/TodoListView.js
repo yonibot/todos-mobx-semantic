@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observable, computed, useStrict, action } from 'mobx';
 import { observer, inject } from 'mobx-react';
-import { Icon, Grid } from 'semantic-ui-react';
+import { Icon, Grid, Input, List, Header, Button } from 'semantic-ui-react';
 import DevTools from 'mobx-react-devtools';
 import Todo from '../models/Todo';
 import User from '../models/User';
@@ -9,9 +9,15 @@ import TodoItemUI from './TodoItemUI';
 import { Link } from 'react-router';
 
 const Styles = {
-  mainContainer: {
-    backgroundImage: 'url(https://s13.postimg.org/e4mqqm0qf/landscape_1802340_1920.jpg)',
-    height: '100%'
+  headerName: {
+    fontSize: '60px',
+    color: 'white'
+  },
+  todoContainer: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+  },
+  todoList: {
+    color: 'white'
   }
 }
  
@@ -37,26 +43,29 @@ const Styles = {
   }
 
   render() {
-    let currentTodos = this.props.todosStore.myTodos(this.currentUser());
+    let currentTodos = this.currentUser().todos;
     return (
       <div style={ Styles.mainContainer } > 
-        <Grid centered columns={2}>
-            <Grid.Column>
-              <h1>Current User: <strong>{ this.currentUser().username }</strong></h1>
-              <input
+        <Grid centered columns={2} textAlign='left'>
+            <Grid.Column style={ Styles.todoContainer }>
+              <Header as='h1' style={ Styles.headerName }>
+                { this.currentUser().username }
+              </Header>
+              <Input
                 onKeyDown={this.handleKeyPress} />
-              <ul>
+              <List divided style={ Styles.todoList } inverted>
                 {currentTodos.map(todo =>
-                    <li key={ todo.id }>
-                      <TodoItemUI 
+                    <List.Item key={ todo.id }>
+                      <TodoItemUI
                         todo={ todo }
                         toggleCompleted={ this.toggleCompleted }
                         deleteTodo={ this.deleteTodo } />
-                    </li>
+                    </List.Item>
                   )}
-              </ul>
+              </List>
               <br />
-              <Link to="/">Home</Link>
+              <Link to="/">Users</Link>
+
             </Grid.Column>
         </Grid>
         <DevTools />

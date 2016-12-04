@@ -1,9 +1,20 @@
-import { observable, computed, useStrict, action } from 'mobx';
+import { observable, computed, useStrict, action, autorun } from 'mobx';
 import Todo from './Todo';
 import User from './User';
 
 export class TodosStore {
 	@observable todos = [];
+
+  constructor() {
+    var add = autorun(() => {
+      // Add a new Swanson quote on completion of todo
+      // http://ron-swanson-quotes.herokuapp.com/v2/quotes
+      // 
+      // Add it to Todo List under username
+      // when a new todo is marked completed.
+      console.log('Number of todos', this.todos.length);
+    })
+  }
 
 	@action addTodo(text, user) {
 		this.todos.push(new Todo(text, user));
@@ -26,9 +37,11 @@ export class TodosStore {
   	}
   	return this.todos;
   }
-
 }
 
+autorun(() => {
+
+})
 
 
 export class UsersStore {

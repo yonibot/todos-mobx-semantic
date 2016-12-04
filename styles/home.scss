@@ -1,3 +1,7 @@
-h1 {
-  color: tomato;
+.completedItem {
+	text-decoration: line-through;
+	color: white;
+}
+.validItem { 
+	color: white;
 }

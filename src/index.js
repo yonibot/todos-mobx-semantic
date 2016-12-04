@@ -22,7 +22,7 @@ const todosStore = new TodosStore();
 todosStore.addTodo('Go hunt for gems', usersStore.users[0]);
 todosStore.addTodo('Find a job', usersStore.users[1]);
 
-const allStores = {usersStore, todosStore}
+export const allStores = {usersStore, todosStore}
 
 ReactDOM.render((
   <Provider {...allStores}>

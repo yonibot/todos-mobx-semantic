@@ -4,7 +4,17 @@ import { observer } from 'mobx-react';
 import { Icon } from 'semantic-ui-react';
 import DevTools from 'mobx-react-devtools';
 
-@observer class TodoItemUI extends React.Component {
+const Styles = {
+  trashBin: {
+    paddingLeft: '15px'
+  },
+  item: {
+    paddingLeft: '7px'
+  }
+}
+
+@observer 
+class TodoItemUI extends Component {
 
   handleToggleCompleted = () => {
     let { todo } = this.props;
@@ -20,12 +30,17 @@ import DevTools from 'mobx-react-devtools';
     let { todo } = this.props;
     return (
       <div>
-        <span>{ todo.title }</span>
-        <input 
+        <input
           type='checkbox'
           checked={ todo.completed }
           onChange={ this.handleToggleCompleted } />
-        <Icon 
+        <span 
+          className={ todo.completed ? 'completedItem' : 'validItem'}
+          style={ Styles.item }>
+          { todo.title }
+        </span>
+        <Icon
+          style={ Styles.trashBin }
           name='trash outline'
           onClick={ this.handleDeleteTodo } />
       </div>

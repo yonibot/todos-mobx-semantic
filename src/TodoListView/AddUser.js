@@ -3,8 +3,15 @@ import { observable, action } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { Link, Redirect } from 'react-router';
 import User from '../models/User';
-import { Button, Icon, Card, Image, Form } from 'semantic-ui-react';
+import { Button, Icon, Card, Image, Form, Header } from 'semantic-ui-react';
 import DevTools from 'mobx-react-devtools';
+
+
+const Styles = {
+	addUser: {
+		color: 'white'
+	}
+}
 
 
 const SubmitButton = ({handleSubmit}) => 
@@ -43,25 +50,28 @@ class AddUser extends Component {
 		this.newUser.email = e.target.value;
 	}
 
-	@action handleSubmit = () => {
+	@action handleSubmit = (e) => {
+		e.preventDefault();
 		this.props.usersStore.addUser(this.newUser);
 		this.toggleRedirect = true;
 	}
 
 	render() {
 		return (
-			<div>
-				<h3>Add new user:</h3>
+			<div style={ Styles.addUser }>
+				<h1>Add new user:</h1>
 			  <Form>
 			    <Form.Field>
-			      <label>Username</label>
-						<input 
+			      <label
+			      	style={{color: 'white'}}>Username</label>
+						<input
 							value={ this.newUser.usernamename }
 							onChange={ this.handleNameChange } 
 							placeholder='username' />
 			    </Form.Field>
 			    <Form.Field>
-			      <label>Email</label>
+			      <label
+			      	style={{color: 'white'}}>Email</label>
 						<input 
 							value={ this.newUser.email }
 							onChange={ this.handleEmailChange }
