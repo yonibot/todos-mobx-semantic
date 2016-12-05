@@ -1,7 +1,7 @@
 {
-  "name": "react-simple-boilerplate",
+  "name": "todos-mobx-semantic",
   "version": "1.0.0",
-  "description": "MobX React ES7 Webpack Boilerplate",
+  "description": "Team Todos App",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "webpack-dev-server --inline --content-base . --history-api-fallback",

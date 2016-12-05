@@ -1,3 +1,2 @@
-# React Webpack ES7 MobX Boilerplate
+# Team Todos App
 
-Run `npm i` and `npm start`.
