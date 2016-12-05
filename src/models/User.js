@@ -10,7 +10,11 @@ class User {
 	@observable email;
 
 	constructor(user) {
-		Object.assign(this, user);
+		this.assignUser(user);
+	}
+
+	@action assignUser(user) {
+		Object.assign(this, user)
 	}
 
 	@computed get gravatar() {

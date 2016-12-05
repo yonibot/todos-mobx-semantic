@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { useStrict, action } from 'mobx';
+import { action } from 'mobx';
 import { Match } from 'react-router';
 import { TodosStore, UsersStore } from './models/stores';
 import UsersUI from './TodoListView/UsersUI';

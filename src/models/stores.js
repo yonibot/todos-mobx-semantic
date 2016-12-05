@@ -39,10 +39,6 @@ export class TodosStore {
   }
 }
 
-autorun(() => {
-
-})
-
 
 export class UsersStore {
 	@observable users = [];

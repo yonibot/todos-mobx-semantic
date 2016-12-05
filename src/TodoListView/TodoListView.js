@@ -14,7 +14,7 @@ const Styles = {
     color: 'white'
   },
   todoContainer: {
-    backgroundColor: 'rgba(0, 0, 0, 0.2)'
+    backgroundColor: 'rgba(0, 0, 0, 0.7)'
   },
   todoList: {
     color: 'white'

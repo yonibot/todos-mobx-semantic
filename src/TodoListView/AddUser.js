@@ -24,7 +24,7 @@ const SubmitButton = ({handleSubmit}) =>
 
 const UserCard = ({user}) =>
 	<Card>
-		<Image src={ (new User(user)).gravatar } />
+		<Image src={ (new User(user)).gravatar } size='medium' />
 		<Card.Content>
 			<Card.Header>
 				{ user.username }

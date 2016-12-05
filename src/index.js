@@ -12,6 +12,7 @@ import { UsersStore, TodosStore } from './models/stores';
 import { Provider } from 'mobx-react';
 import Todo from './models/Todo';
 import User from './models/User';
+import { useStrict } from 'mobx';
 
 const usersStore = new UsersStore();
 usersStore.addUser(new User({username: 'Gemma', email: 'gemma@example.com'})); 
@@ -23,6 +24,8 @@ todosStore.addTodo('Go hunt for gems', usersStore.users[0]);
 todosStore.addTodo('Find a job', usersStore.users[1]);
 
 export const allStores = {usersStore, todosStore}
+
+useStrict(true);
 
 ReactDOM.render((
   <Provider {...allStores}>
