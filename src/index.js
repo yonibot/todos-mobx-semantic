@@ -17,7 +17,6 @@ import { useStrict } from 'mobx';
 const usersStore = new UsersStore();
 usersStore.addUser(new User({username: 'Gemma', email: 'gemma@example.com'})); 
 usersStore.addUser(new User({username: 'Alice', email: 'alice@example.com'})); 
-usersStore.addUser(new User({username: 'Yoni', email: 'yoni@fastmail.com'})); 
 
 const todosStore = new TodosStore();
 todosStore.addTodo('Go hunt for gems', usersStore.users[0]);
